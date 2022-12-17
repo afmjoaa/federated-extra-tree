@@ -1,0 +1,53 @@
+//python3 -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/hello.proto
+syntax = "proto3";
+
+package com.groupseven.fet;
+
+//All function need to be for master 
+//For simplicity only master can initiate communication
+service MasterClientCommunicationService {
+    //
+    rpc BroadcastRandomFeatureSet (BroadcastRandomFeatureSetRequest) returns (ReceivedResponse);
+    rpc GetRandomSplitValueFromClient(stream GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
+    rpc GetAggregatedValuesFromClient(stream GetAggregatedValuesFromClientRequest) returns (GetAggregatedValuesFromClientResponse);
+    rpc BroadcastTreeNodesBasedOnBestSplit(BroadcastTreeNodesBasedOnBestSplitRequest) returns (ReceivedResponse);
+}
+
+message BroadcastRandomFeatureSetRequest {
+    repeated int32 selectedFeatures = 1;
+}
+
+message ReceivedResponse {
+    bool response = 1;
+}
+
+message GetRandomSplitValueFromClientRequest {
+    int32 feature = 1;
+    int32 clientId = 2;
+}
+
+message GetRandomSplitValueFromClientResponse {
+    int32 clientId = 1;
+    double splitValue = 2;
+}
+
+message GetAggregatedValuesFromClientRequest {
+    int32 feature = 1;
+    int32 clientId = 2;
+    double splitValue = 3;
+}
+
+message GetAggregatedValuesFromClientResponse {
+    AggregatedValue aggregatedValueLeft = 1;
+    AggregatedValue aggregatedValueRight = 2;
+}
+
+message AggregatedValue {
+    int32 approvedLoan = 1;
+    int32 declinedLoan = 2;
+}
+
+message BroadcastTreeNodesBasedOnBestSplitRequest {
+    int32 feature = 1;
+    double splitValue = 2;
+}
