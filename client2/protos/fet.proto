@@ -1,4 +1,4 @@
-//python3 -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/hello.proto
+//python3 -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/fet.proto
 syntax = "proto3";
 
 package com.groupseven.fet;
@@ -8,7 +8,7 @@ package com.groupseven.fet;
 service MasterClientCommunicationService {
     //
     rpc BroadcastRandomFeatureSet (BroadcastRandomFeatureSetRequest) returns (ReceivedResponse);
-    rpc GetRandomSplitValueFromClient(stream GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
+    rpc GetRandomSplitValueFromClient(GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
     rpc GetAggregatedValuesFromClient(stream GetAggregatedValuesFromClientRequest) returns (GetAggregatedValuesFromClientResponse);
     rpc BroadcastTreeNodesBasedOnBestSplit(BroadcastTreeNodesBasedOnBestSplitRequest) returns (ReceivedResponse);
 }
@@ -22,7 +22,7 @@ message ReceivedResponse {
 }
 
 message GetRandomSplitValueFromClientRequest {
-    int32 feature = 1;
+    string feature = 1;
     int32 clientId = 2;
 }
 

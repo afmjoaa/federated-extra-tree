@@ -8,9 +8,15 @@ package com.groupseven.fet;
 service MasterClientCommunicationService {
     //
     rpc BroadcastRandomFeatureSet (BroadcastRandomFeatureSetRequest) returns (ReceivedResponse);
-    rpc GetRandomSplitValueFromClient(stream GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
+    
+    rpc GetRandomSplitValueFromClient(GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
+    
+    
+    
     rpc GetAggregatedValuesFromClient(stream GetAggregatedValuesFromClientRequest) returns (GetAggregatedValuesFromClientResponse);
     rpc BroadcastTreeNodesBasedOnBestSplit(BroadcastTreeNodesBasedOnBestSplitRequest) returns (ReceivedResponse);
+    
+    
 }
 
 message BroadcastRandomFeatureSetRequest {
@@ -22,7 +28,7 @@ message ReceivedResponse {
 }
 
 message GetRandomSplitValueFromClientRequest {
-    int32 feature = 1;
+    string feature = 1;
     int32 clientId = 2;
 }
 

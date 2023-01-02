@@ -21,7 +21,7 @@ class MasterClientCommunicationServiceStub(object):
                 request_serializer=fet__pb2.BroadcastRandomFeatureSetRequest.SerializeToString,
                 response_deserializer=fet__pb2.ReceivedResponse.FromString,
                 )
-        self.GetRandomSplitValueFromClient = channel.stream_unary(
+        self.GetRandomSplitValueFromClient = channel.unary_unary(
                 '/com.groupseven.fet.MasterClientCommunicationService/GetRandomSplitValueFromClient',
                 request_serializer=fet__pb2.GetRandomSplitValueFromClientRequest.SerializeToString,
                 response_deserializer=fet__pb2.GetRandomSplitValueFromClientResponse.FromString,
@@ -50,7 +50,7 @@ class MasterClientCommunicationServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetRandomSplitValueFromClient(self, request_iterator, context):
+    def GetRandomSplitValueFromClient(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -76,7 +76,7 @@ def add_MasterClientCommunicationServiceServicer_to_server(servicer, server):
                     request_deserializer=fet__pb2.BroadcastRandomFeatureSetRequest.FromString,
                     response_serializer=fet__pb2.ReceivedResponse.SerializeToString,
             ),
-            'GetRandomSplitValueFromClient': grpc.stream_unary_rpc_method_handler(
+            'GetRandomSplitValueFromClient': grpc.unary_unary_rpc_method_handler(
                     servicer.GetRandomSplitValueFromClient,
                     request_deserializer=fet__pb2.GetRandomSplitValueFromClientRequest.FromString,
                     response_serializer=fet__pb2.GetRandomSplitValueFromClientResponse.SerializeToString,
@@ -121,7 +121,7 @@ class MasterClientCommunicationService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetRandomSplitValueFromClient(request_iterator,
+    def GetRandomSplitValueFromClient(request,
             target,
             options=(),
             channel_credentials=None,
@@ -131,7 +131,7 @@ class MasterClientCommunicationService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/com.groupseven.fet.MasterClientCommunicationService/GetRandomSplitValueFromClient',
+        return grpc.experimental.unary_unary(request, target, '/com.groupseven.fet.MasterClientCommunicationService/GetRandomSplitValueFromClient',
             fet__pb2.GetRandomSplitValueFromClientRequest.SerializeToString,
             fet__pb2.GetRandomSplitValueFromClientResponse.FromString,
             options, channel_credentials,
