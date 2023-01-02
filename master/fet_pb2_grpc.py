@@ -6,9 +6,7 @@ import fet_pb2 as fet__pb2
 
 
 class MasterClientCommunicationServiceStub(object):
-    """All function need to be for master 
-    For simplicity only master can initiate communication
-    """
+    """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
         """Constructor.
@@ -34,9 +32,7 @@ class MasterClientCommunicationServiceStub(object):
 
 
 class MasterClientCommunicationServiceServicer(object):
-    """All function need to be for master 
-    For simplicity only master can initiate communication
-    """
+    """Missing associated documentation comment in .proto file."""
 
     def GetRandomSplitValueFromClient(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -82,9 +78,7 @@ def add_MasterClientCommunicationServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class MasterClientCommunicationService(object):
-    """All function need to be for master 
-    For simplicity only master can initiate communication
-    """
+    """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def GetRandomSplitValueFromClient(request,

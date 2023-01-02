@@ -28,7 +28,7 @@ message GetRandomSplitValueFromClientResponse {
 }
 
 message GetAggregatedValuesFromClientRequest {
-    int32 feature = 1;
+    string feature = 1;
     int32 clientId = 2;
     double splitValue = 3;
 }
