@@ -31,6 +31,7 @@ message GetAggregatedValuesFromClientRequest {
     string feature = 1;
     int32 clientId = 2;
     double splitValue = 3;
+    string dataSet = 4;
 }
 
 message GetAggregatedValuesFromClientResponse {
@@ -44,7 +45,7 @@ message AggregatedValue {
 }
 
 message BroadcastTreeNodesBasedOnBestSplitRequest {
-    int32 feature = 1;
+    string feature = 1;
     double splitValue = 2;
     int32 treeHeight = 3;
 }

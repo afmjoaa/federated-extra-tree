@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tfet.proto\x12\x12\x63om.groupseven.fet\"$\n\x10ReceivedResponse\x12\x10\n\x08response\x18\x01 \x01(\x08\"I\n$GetRandomSplitValueFromClientRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x10\n\x08\x63lientId\x18\x02 \x01(\x05\"M\n%GetRandomSplitValueFromClientResponse\x12\x10\n\x08\x63lientId\x18\x01 \x01(\x05\x12\x12\n\nsplitValue\x18\x02 \x01(\x01\"]\n$GetAggregatedValuesFromClientRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x10\n\x08\x63lientId\x18\x02 \x01(\x05\x12\x12\n\nsplitValue\x18\x03 \x01(\x01\"\xac\x01\n%GetAggregatedValuesFromClientResponse\x12@\n\x13\x61ggregatedValueLeft\x18\x01 \x01(\x0b\x32#.com.groupseven.fet.AggregatedValue\x12\x41\n\x14\x61ggregatedValueRight\x18\x02 \x01(\x0b\x32#.com.groupseven.fet.AggregatedValue\"=\n\x0f\x41ggregatedValue\x12\x14\n\x0c\x61pprovedLoan\x18\x01 \x01(\x05\x12\x14\n\x0c\x64\x65\x63linedLoan\x18\x02 \x01(\x05\"d\n)BroadcastTreeNodesBasedOnBestSplitRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\x05\x12\x12\n\nsplitValue\x18\x02 \x01(\x01\x12\x12\n\ntreeHeight\x18\x03 \x01(\x05\x32\xdc\x03\n MasterClientCommunicationService\x12\x94\x01\n\x1dGetRandomSplitValueFromClient\x12\x38.com.groupseven.fet.GetRandomSplitValueFromClientRequest\x1a\x39.com.groupseven.fet.GetRandomSplitValueFromClientResponse\x12\x94\x01\n\x1dGetAggregatedValuesFromClient\x12\x38.com.groupseven.fet.GetAggregatedValuesFromClientRequest\x1a\x39.com.groupseven.fet.GetAggregatedValuesFromClientResponse\x12\x89\x01\n\"BroadcastTreeNodesBasedOnBestSplit\x12=.com.groupseven.fet.BroadcastTreeNodesBasedOnBestSplitRequest\x1a$.com.groupseven.fet.ReceivedResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tfet.proto\x12\x12\x63om.groupseven.fet\"$\n\x10ReceivedResponse\x12\x10\n\x08response\x18\x01 \x01(\x08\"I\n$GetRandomSplitValueFromClientRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x10\n\x08\x63lientId\x18\x02 \x01(\x05\"M\n%GetRandomSplitValueFromClientResponse\x12\x10\n\x08\x63lientId\x18\x01 \x01(\x05\x12\x12\n\nsplitValue\x18\x02 \x01(\x01\"n\n$GetAggregatedValuesFromClientRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x10\n\x08\x63lientId\x18\x02 \x01(\x05\x12\x12\n\nsplitValue\x18\x03 \x01(\x01\x12\x0f\n\x07\x64\x61taSet\x18\x04 \x01(\t\"\xac\x01\n%GetAggregatedValuesFromClientResponse\x12@\n\x13\x61ggregatedValueLeft\x18\x01 \x01(\x0b\x32#.com.groupseven.fet.AggregatedValue\x12\x41\n\x14\x61ggregatedValueRight\x18\x02 \x01(\x0b\x32#.com.groupseven.fet.AggregatedValue\"=\n\x0f\x41ggregatedValue\x12\x14\n\x0c\x61pprovedLoan\x18\x01 \x01(\x05\x12\x14\n\x0c\x64\x65\x63linedLoan\x18\x02 \x01(\x05\"d\n)BroadcastTreeNodesBasedOnBestSplitRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x12\n\nsplitValue\x18\x02 \x01(\x01\x12\x12\n\ntreeHeight\x18\x03 \x01(\x05\x32\xdc\x03\n MasterClientCommunicationService\x12\x94\x01\n\x1dGetRandomSplitValueFromClient\x12\x38.com.groupseven.fet.GetRandomSplitValueFromClientRequest\x1a\x39.com.groupseven.fet.GetRandomSplitValueFromClientResponse\x12\x94\x01\n\x1dGetAggregatedValuesFromClient\x12\x38.com.groupseven.fet.GetAggregatedValuesFromClientRequest\x1a\x39.com.groupseven.fet.GetAggregatedValuesFromClientResponse\x12\x89\x01\n\"BroadcastTreeNodesBasedOnBestSplit\x12=.com.groupseven.fet.BroadcastTreeNodesBasedOnBestSplitRequest\x1a$.com.groupseven.fet.ReceivedResponseb\x06proto3')
 
 
 
@@ -85,13 +85,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GETRANDOMSPLITVALUEFROMCLIENTRESPONSE._serialized_start=146
   _GETRANDOMSPLITVALUEFROMCLIENTRESPONSE._serialized_end=223
   _GETAGGREGATEDVALUESFROMCLIENTREQUEST._serialized_start=225
-  _GETAGGREGATEDVALUESFROMCLIENTREQUEST._serialized_end=318
-  _GETAGGREGATEDVALUESFROMCLIENTRESPONSE._serialized_start=321
-  _GETAGGREGATEDVALUESFROMCLIENTRESPONSE._serialized_end=493
-  _AGGREGATEDVALUE._serialized_start=495
-  _AGGREGATEDVALUE._serialized_end=556
-  _BROADCASTTREENODESBASEDONBESTSPLITREQUEST._serialized_start=558
-  _BROADCASTTREENODESBASEDONBESTSPLITREQUEST._serialized_end=658
-  _MASTERCLIENTCOMMUNICATIONSERVICE._serialized_start=661
-  _MASTERCLIENTCOMMUNICATIONSERVICE._serialized_end=1137
+  _GETAGGREGATEDVALUESFROMCLIENTREQUEST._serialized_end=335
+  _GETAGGREGATEDVALUESFROMCLIENTRESPONSE._serialized_start=338
+  _GETAGGREGATEDVALUESFROMCLIENTRESPONSE._serialized_end=510
+  _AGGREGATEDVALUE._serialized_start=512
+  _AGGREGATEDVALUE._serialized_end=573
+  _BROADCASTTREENODESBASEDONBESTSPLITREQUEST._serialized_start=575
+  _BROADCASTTREENODESBASEDONBESTSPLITREQUEST._serialized_end=675
+  _MASTERCLIENTCOMMUNICATIONSERVICE._serialized_start=678
+  _MASTERCLIENTCOMMUNICATIONSERVICE._serialized_end=1154
 # @@protoc_insertion_point(module_scope)

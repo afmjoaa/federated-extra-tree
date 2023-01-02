@@ -4,6 +4,10 @@ import logging
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
+from collections import defaultdict
+
+# Create a defaultdict with a default value of 0
+my_sample_dict = {}
 
 
 def convert_string_columns_to_numeric():
@@ -74,17 +78,34 @@ class FetCommunication(fet_pb2_grpc.MasterClientCommunicationServiceServicer):
 
     def GetAggregatedValuesFromClient(self, request, context):
         logging.warning(f'GetAggregatedValuesFromClient requestObject: {request}')
+        # dataSet need to be used from the my_sample_dict
 
         numerical_column = convert_string_columns_to_numeric()
         df1, df2 = split_dataframe_on_column_value(numerical_column, request.feature, request.splitValue)
         unique_values, counts_left = get_aggregated_label_counts(df1, 'Loan_Status')
         unique_values, counts_right = get_aggregated_label_counts(df2, 'Loan_Status')
 
+        response = fet_pb2.GetAggregatedValuesFromClientResponse()
 
+        ag_left = fet_pb2.AggregatedValue()
+        ag_left.approvedLoan = counts_left[0]
+        ag_left.declinedLoan = counts_left[1]
 
+        ag_right = fet_pb2.AggregatedValue()
+        ag_right.approvedLoan = counts_right[0]
+        ag_right.declinedLoan = counts_right[1]
 
-        return super().GetAggregatedValuesFromClient(request, context)
+        response.aggregatedValueLeft = ag_left
+        response.aggregatedValueRight = ag_right
+
+        return response
 
     def BroadcastTreeNodesBasedOnBestSplit(self, request, context):
         logging.warning(f'BroadcastTreeNodesBasedOnBestSplit requestObject: {request}')
+        # string feature = 1;
+        #     double splitValue = 2;
+        #     int32 treeHeight = 3;
+
+        #split the dataset and same the split in my_sample_dict
+
         return super().BroadcastTreeNodesBasedOnBestSplit(request, context)
