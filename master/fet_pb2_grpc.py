@@ -16,17 +16,12 @@ class MasterClientCommunicationServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.BroadcastRandomFeatureSet = channel.unary_unary(
-                '/com.groupseven.fet.MasterClientCommunicationService/BroadcastRandomFeatureSet',
-                request_serializer=fet__pb2.BroadcastRandomFeatureSetRequest.SerializeToString,
-                response_deserializer=fet__pb2.ReceivedResponse.FromString,
-                )
         self.GetRandomSplitValueFromClient = channel.unary_unary(
                 '/com.groupseven.fet.MasterClientCommunicationService/GetRandomSplitValueFromClient',
                 request_serializer=fet__pb2.GetRandomSplitValueFromClientRequest.SerializeToString,
                 response_deserializer=fet__pb2.GetRandomSplitValueFromClientResponse.FromString,
                 )
-        self.GetAggregatedValuesFromClient = channel.stream_unary(
+        self.GetAggregatedValuesFromClient = channel.unary_unary(
                 '/com.groupseven.fet.MasterClientCommunicationService/GetAggregatedValuesFromClient',
                 request_serializer=fet__pb2.GetAggregatedValuesFromClientRequest.SerializeToString,
                 response_deserializer=fet__pb2.GetAggregatedValuesFromClientResponse.FromString,
@@ -43,20 +38,13 @@ class MasterClientCommunicationServiceServicer(object):
     For simplicity only master can initiate communication
     """
 
-    def BroadcastRandomFeatureSet(self, request, context):
-        """
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetRandomSplitValueFromClient(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAggregatedValuesFromClient(self, request_iterator, context):
+    def GetAggregatedValuesFromClient(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -71,17 +59,12 @@ class MasterClientCommunicationServiceServicer(object):
 
 def add_MasterClientCommunicationServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'BroadcastRandomFeatureSet': grpc.unary_unary_rpc_method_handler(
-                    servicer.BroadcastRandomFeatureSet,
-                    request_deserializer=fet__pb2.BroadcastRandomFeatureSetRequest.FromString,
-                    response_serializer=fet__pb2.ReceivedResponse.SerializeToString,
-            ),
             'GetRandomSplitValueFromClient': grpc.unary_unary_rpc_method_handler(
                     servicer.GetRandomSplitValueFromClient,
                     request_deserializer=fet__pb2.GetRandomSplitValueFromClientRequest.FromString,
                     response_serializer=fet__pb2.GetRandomSplitValueFromClientResponse.SerializeToString,
             ),
-            'GetAggregatedValuesFromClient': grpc.stream_unary_rpc_method_handler(
+            'GetAggregatedValuesFromClient': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAggregatedValuesFromClient,
                     request_deserializer=fet__pb2.GetAggregatedValuesFromClientRequest.FromString,
                     response_serializer=fet__pb2.GetAggregatedValuesFromClientResponse.SerializeToString,
@@ -104,23 +87,6 @@ class MasterClientCommunicationService(object):
     """
 
     @staticmethod
-    def BroadcastRandomFeatureSet(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/com.groupseven.fet.MasterClientCommunicationService/BroadcastRandomFeatureSet',
-            fet__pb2.BroadcastRandomFeatureSetRequest.SerializeToString,
-            fet__pb2.ReceivedResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def GetRandomSplitValueFromClient(request,
             target,
             options=(),
@@ -138,7 +104,7 @@ class MasterClientCommunicationService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAggregatedValuesFromClient(request_iterator,
+    def GetAggregatedValuesFromClient(request,
             target,
             options=(),
             channel_credentials=None,
@@ -148,7 +114,7 @@ class MasterClientCommunicationService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/com.groupseven.fet.MasterClientCommunicationService/GetAggregatedValuesFromClient',
+        return grpc.experimental.unary_unary(request, target, '/com.groupseven.fet.MasterClientCommunicationService/GetAggregatedValuesFromClient',
             fet__pb2.GetAggregatedValuesFromClientRequest.SerializeToString,
             fet__pb2.GetAggregatedValuesFromClientResponse.FromString,
             options, channel_credentials,

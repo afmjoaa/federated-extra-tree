@@ -3,18 +3,14 @@ syntax = "proto3";
 
 package com.groupseven.fet;
 
-//All function need to be for master 
-//For simplicity only master can initiate communication
 service MasterClientCommunicationService {
-    //
-    rpc BroadcastRandomFeatureSet (BroadcastRandomFeatureSetRequest) returns (ReceivedResponse);
-    rpc GetRandomSplitValueFromClient(GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
-    rpc GetAggregatedValuesFromClient(stream GetAggregatedValuesFromClientRequest) returns (GetAggregatedValuesFromClientResponse);
-    rpc BroadcastTreeNodesBasedOnBestSplit(BroadcastTreeNodesBasedOnBestSplitRequest) returns (ReceivedResponse);
-}
 
-message BroadcastRandomFeatureSetRequest {
-    repeated int32 selectedFeatures = 1;
+    rpc GetRandomSplitValueFromClient(GetRandomSplitValueFromClientRequest) returns (GetRandomSplitValueFromClientResponse);
+
+    rpc GetAggregatedValuesFromClient(GetAggregatedValuesFromClientRequest) returns (GetAggregatedValuesFromClientResponse);
+
+    rpc BroadcastTreeNodesBasedOnBestSplit(BroadcastTreeNodesBasedOnBestSplitRequest) returns (ReceivedResponse);
+
 }
 
 message ReceivedResponse {
@@ -50,4 +46,5 @@ message AggregatedValue {
 message BroadcastTreeNodesBasedOnBestSplitRequest {
     int32 feature = 1;
     double splitValue = 2;
+    int32 treeHeight = 3;
 }
