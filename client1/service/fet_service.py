@@ -4,17 +4,17 @@ import logging
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
-from collections import defaultdict
 
-# Create a defaultdict with a default value of 0
+
 my_sample_dict = {}
 
 
 def convert_string_columns_to_numeric():
     df = pd.read_csv('ds_client_one.csv')
-    df = df.drop(columns=['Loan_Status', 'Loan_ID'], axis=1)
+
     # Select all columns with string values
     string_columns = df.select_dtypes(include='object')
+    string_columns = string_columns.drop(columns=['Loan_Status', 'Loan_ID'], axis=1)
 
     # Create a label encoder for each string column
     label_encoders = {column: preprocessing.LabelEncoder() for column in string_columns}
@@ -78,9 +78,12 @@ class FetCommunication(fet_pb2_grpc.MasterClientCommunicationServiceServicer):
 
     def GetAggregatedValuesFromClient(self, request, context):
         logging.warning(f'GetAggregatedValuesFromClient requestObject: {request}')
-        # dataSet need to be used from the my_sample_dict
 
+        # dataSet need to be used from the my_sample_dict
         numerical_column = convert_string_columns_to_numeric()
+        if request.dataSet in my_sample_dict:
+            numerical_column = my_sample_dict[request.dataSet]
+
         df1, df2 = split_dataframe_on_column_value(numerical_column, request.feature, request.splitValue)
         unique_values, counts_left = get_aggregated_label_counts(df1, 'Loan_Status')
         unique_values, counts_right = get_aggregated_label_counts(df2, 'Loan_Status')
@@ -102,10 +105,14 @@ class FetCommunication(fet_pb2_grpc.MasterClientCommunicationServiceServicer):
 
     def BroadcastTreeNodesBasedOnBestSplit(self, request, context):
         logging.warning(f'BroadcastTreeNodesBasedOnBestSplit requestObject: {request}')
-        # string feature = 1;
-        #     double splitValue = 2;
-        #     int32 treeHeight = 3;
 
-        #split the dataset and same the split in my_sample_dict
+        # dataSet need to be used from the my_sample_dict
+        numerical_column = convert_string_columns_to_numeric()
+        if request.dataSet in my_sample_dict:
+            numerical_column = my_sample_dict[request.dataSet]
 
-        return super().BroadcastTreeNodesBasedOnBestSplit(request, context)
+        df1, df2 = split_dataframe_on_column_value(numerical_column, request.feature, request.splitValue)
+        my_sample_dict[f'{request.treeHeight}_left'] = df1
+        my_sample_dict[f'{request.treeHeight}_right'] = df2
+
+        return fet_pb2.ReceivedResponse(response=True)

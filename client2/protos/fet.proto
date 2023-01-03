@@ -48,4 +48,5 @@ message BroadcastTreeNodesBasedOnBestSplitRequest {
     string feature = 1;
     double splitValue = 2;
     int32 treeHeight = 3;
+    string dataSet = 4;
 }
