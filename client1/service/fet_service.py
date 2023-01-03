@@ -5,12 +5,11 @@ import numpy as np
 import pandas as pd
 from sklearn import preprocessing
 
-
 my_sample_dict = {}
 
 
 def convert_string_columns_to_numeric():
-    df = pd.read_csv('ds_client_one.csv')
+    df = pd.read_csv('/Users/mohimenul.admin/PycharmProjects/fet/client1/service/ds_client_one.csv')
 
     # Select all columns with string values
     string_columns = df.select_dtypes(include='object')
@@ -56,8 +55,13 @@ def get_aggregated_label_counts(df, column_name):
     unique_values = value_counts.index.tolist()
     counts = value_counts.values.tolist()
 
+    count_map = {'Y': 0, 'N': 0}
     # Return the unique values and counts as a tuple
-    return unique_values, counts
+
+    for idx, uv in enumerate(unique_values):
+        count_map[uv] = counts[idx]
+
+    return count_map
 
 
 class FetCommunication(fet_pb2_grpc.MasterClientCommunicationServiceServicer):
@@ -85,21 +89,22 @@ class FetCommunication(fet_pb2_grpc.MasterClientCommunicationServiceServicer):
             numerical_column = my_sample_dict[request.dataSet]
 
         df1, df2 = split_dataframe_on_column_value(numerical_column, request.feature, request.splitValue)
-        unique_values, counts_left = get_aggregated_label_counts(df1, 'Loan_Status')
-        unique_values, counts_right = get_aggregated_label_counts(df2, 'Loan_Status')
+        counts_left = get_aggregated_label_counts(df1, 'Loan_Status')
+        counts_right = get_aggregated_label_counts(df2, 'Loan_Status')
+        print(f' {counts_left},  {counts_right}')
 
         response = fet_pb2.GetAggregatedValuesFromClientResponse()
 
         ag_left = fet_pb2.AggregatedValue()
-        ag_left.approvedLoan = counts_left[0]
-        ag_left.declinedLoan = counts_left[1]
+        ag_left.approvedLoan = counts_left['Y']
+        ag_left.declinedLoan = counts_left['N']
 
         ag_right = fet_pb2.AggregatedValue()
-        ag_right.approvedLoan = counts_right[0]
-        ag_right.declinedLoan = counts_right[1]
+        ag_right.approvedLoan = counts_right['Y']
+        ag_right.declinedLoan = counts_right['N']
 
-        response.aggregatedValueLeft = ag_left
-        response.aggregatedValueRight = ag_right
+        response.aggregatedValueLeft.CopyFrom(ag_left)
+        response.aggregatedValueRight.CopyFrom(ag_right)
 
         return response
 

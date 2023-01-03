@@ -1,0 +1,9 @@
+﻿Loan_ID,Education,Self_Employed,ApplicantIncome,LoanAmount,Credit_History,Property_Area,Loan_Status
+LP001005,Graduate,Yes,3000,66,1,Urban,Y
+LP001006,Not Graduate,No,2583,120,1,Urban,Y
+LP002494,Graduate,No,6000,140,1,Rural,Y
+LP002501,Graduate,No,16692,110,1,Semiurban,Y
+LP001028,Graduate,No,3073,200,1,Urban,Y
+LP001029,Graduate,No,1853,114,1,Rural,N
+LP001030,Graduate,No,1299,17,1,Urban,Y
+LP001032,Graduate,No,4950,125,1,Urban,Y
